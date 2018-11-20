@@ -1,0 +1,5 @@
+﻿  TileMap.cpp
+c:\users\hnl\desktop\new folder\castlevania-master\castlevania\tilemap.cpp(103): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\users\hnl\desktop\new folder\castlevania-master\castlevania\tilemap.cpp(130): warning C4018: '<': signed/unsigned mismatch
+c:\users\hnl\desktop\new folder\castlevania-master\castlevania\tilemap.cpp(132): warning C4018: '<': signed/unsigned mismatch
+  Castlevania.vcxproj -> C:\Users\HNL\Desktop\New folder\Castlevania-master\Debug\Castlevania.exe
