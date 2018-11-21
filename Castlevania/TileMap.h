@@ -34,12 +34,12 @@ public:
 	// load tat ca cac block tile luu vao sprites
 	void LoadResources(LPDIRECT3DTEXTURE9 texTileMap);
 	// load ma tran du lieu map
-	void Load_MapData();
+	/*void Load_MapData();*/
 	// ve tat ca cac tile nam trong camera
 	void Draw(D3DXVECTOR2 camPosition);
 	int GetMapWidth() { return map_Width; }
 
-	void abcxyz();
+
 	~TileMap();
 };
 

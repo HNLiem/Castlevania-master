@@ -425,7 +425,7 @@ void LoadResources()
 	animations->Add(1004, ani);
 	for (int i = 1; i < 6; i++)
 	{
-		Torch * torch=new Torch;
+		Torch * torch = new Torch;
 		torch->AddAnimation(1003);
 		torch->AddAnimation(1004);
 		torch->SetPosition(i*250.0f, 320 - 64);
@@ -443,7 +443,7 @@ void LoadResources()
 		ItemHeart *itemheart = new ItemHeart();
 		itemheart->AddAnimation(1005);
 		itemheart->AddAnimation(1006);
-		itemheart->SetPosition(i*250, 320 - 16);
+		itemheart->SetPosition(i*250, 320-64);
 		objects.push_back(itemheart);
 	}
 	// load item roi
@@ -453,12 +453,12 @@ void LoadResources()
 	ani = new Animation(100);
 	ani->Add(20008);
 	animations->Add(1008, ani);
-	for (int i = 1; i < 3; i++)
+	for (int i = 3; i < 5; i++)
 	{
 		ItemWhip *itemwhip = new ItemWhip();
 		itemwhip->AddAnimation(1007);
 		itemwhip->AddAnimation(1008);
-		itemwhip->SetPosition(i*250*2, 320 - 32);
+		itemwhip->SetPosition(i*250, 320 - 64);
 		objects.push_back(itemwhip);
 	}
 	// load item knife
@@ -471,12 +471,13 @@ void LoadResources()
 	ItemKnife *itemknife = new ItemKnife();
 	itemknife->AddAnimation(1009);
 	itemknife->AddAnimation(1010);
-	itemknife->SetPosition(250*5, 320 - 18);
+	itemknife->SetPosition(250*5, 320 - 64);
 	objects.push_back(itemknife);
+	
 	// load map
 	tilemap = new TileMap(L"Resources\\map1.txt", 1536, 384, 32, 32);
 	tilemap->LoadResources(texmap);
-	tilemap->Load_MapData();
+	//tilemap->Load_MapData();
 }
 void Update(DWORD dt)
 {
@@ -489,16 +490,18 @@ void Update(DWORD dt)
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);
+		if (objects[i]->GetDie()==true)
+		{
+			objects.erase(objects.begin() + i);
+		}
 	}
-
 	float cx, cy;
 	cx = simon->Getx();
 	cy = simon->Gety();
 	if (cx > SCREEN_WIDTH / 2 && cx + SCREEN_WIDTH / 2 < tilemap->GetMapWidth())
 	{
 		game->SetPosition(cx - SCREEN_WIDTH / 2, 0);
-	}
-	
+	}	
 }
 void Render()
 {
@@ -515,12 +518,7 @@ void Render()
 		for (int i = 0; i < objects.size(); i++)
 		{
 			objects[i]->Render();
-		}
-		/*for (int i = objects.size(); i > 0 ; i--)
-		{
-			objects[i]->Render();
-		}*/
-		
+		}	
 		spriteHandler->End();
 		d3ddv->EndScene();
 	}

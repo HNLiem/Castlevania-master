@@ -9,6 +9,7 @@ using namespace std;
 
 void Simon::Update(DWORD dt,vector<LPGAMEOBJECT> *coObjects)
 {
+	
 	GameObject::Update(dt);
 	vy += SIMON_GRAVITY*dt;
 	this->weapon.SetPosition(this->Getx(),this->Gety());
@@ -42,6 +43,8 @@ void Simon::Update(DWORD dt,vector<LPGAMEOBJECT> *coObjects)
 					itemheart->SetState(ITEMHEART_STATE_DIE);
 					this->heart += 1;
 				}			
+				itemheart->SetDie(true);
+
 			}
 			else if (dynamic_cast<ItemWhip *>(e->obj))
 			{
@@ -53,6 +56,7 @@ void Simon::Update(DWORD dt,vector<LPGAMEOBJECT> *coObjects)
 					this->weapon.SetLevel(this->weaponLevel);
 					this->state = SIMON_STATE_LEVEL_WEAPON;
 				}
+				itemwhip->SetDie(true);
 			}
 			else if (dynamic_cast<ItemKnife *>(e->obj))
 			{
@@ -62,6 +66,8 @@ void Simon::Update(DWORD dt,vector<LPGAMEOBJECT> *coObjects)
 					itemknife->SetState(ITEMKNIFE_STATE_DIE);
 					this->knife += 1;
 				}
+				
+				itemknife->SetDie(true);
 			}
 			else if (dynamic_cast<Torch *>(e->obj))
 			{

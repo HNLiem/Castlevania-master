@@ -4,16 +4,19 @@
 
 void ItemKnife::Render()
 {
-	int ani;
-	if (state == ITEMKNIFE_STATE_DIE)
+	if (fall)
 	{
-		ani = ITEMKNIFE_ANI_DIE;
+		int ani;
+		if (state == ITEMKNIFE_STATE_DIE)
+		{
+			ani = ITEMKNIFE_ANI_DIE;
+		}
+		else
+		{
+			ani = ITEMKNIFE_ANI;
+		}
+		animations[ani]->Render(x, y);
 	}
-	else
-	{
-		ani = ITEMKNIFE_ANI;
-	}
-	animations[ani]->Render(x, y);
 }
 
 void ItemKnife::SetState(int state)
@@ -49,4 +52,13 @@ void ItemKnife::GetBoundingBox(float & l, float & t, float & r, float & b)
 void ItemKnife::Update(DWORD dt, vector<LPGAMEOBJECT>* colliable_objects)
 {
 	GameObject::Update(dt, colliable_objects);
+	if (fall)
+	{
+		y += 0.1 * dt;
+		if (y > 320 - ITEMKNIFE_BBOX_HEIGHT)
+		{
+			vy = 0;
+			y = 320 - ITEMKNIFE_BBOX_HEIGHT;
+		}
+	}
 }

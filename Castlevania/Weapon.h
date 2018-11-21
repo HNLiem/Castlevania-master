@@ -30,7 +30,7 @@ public:
 	{
 		untouchable = 0;
 	}
-	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> coObjects);
+	virtual void Update(DWORD dt, vector<LPGAMEOBJECT> &coObjects);
 	virtual void Render(float nx);
 	void SetState(int state);
 	void SetLevel(int l) { this->level = l; }

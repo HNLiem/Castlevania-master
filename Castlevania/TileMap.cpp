@@ -49,10 +49,6 @@ void TileMap::LoadResources(LPDIRECT3DTEXTURE9 texTileMap)
 			id_sprite += 1;
 		}
 	}
-}
-
-void TileMap::Load_MapData()
-{
 	fstream fs;
 	fs.open(filePath_data, ios::in);
 
@@ -88,6 +84,43 @@ void TileMap::Load_MapData()
 	fs.close();
 }
 
+//void TileMap::Load_MapData()
+//{
+//	fstream fs;
+//	fs.open(filePath_data, ios::in);
+//
+//	if (fs.fail())
+//	{
+//		DebugOut(L"[ERROR] TileMap::Load_MapData failed: ID=%d", ID);
+//		fs.close();
+//		return;
+//	}
+//
+//	string line;
+//
+//	while (!fs.eof())
+//	{
+//		getline(fs, line);
+//
+//		// tách số từ chuỗi đọc được
+//
+//		vector<int> numInLine;
+//		stringstream ss(line);
+//		int n;
+//
+//		while (ss >> n) {
+//			numInLine.push_back(n);
+//		}
+//
+//		// thêm vào ma trận map_Data
+//
+//		map_Data.push_back(numInLine);
+//	}
+//
+//
+//	fs.close();
+//}
+
 void TileMap::Draw(D3DXVECTOR2 camPosition)
 {
 	int start_col_to_draw = (int)camPosition.x / 32;
@@ -107,38 +140,6 @@ void TileMap::Draw(D3DXVECTOR2 camPosition)
 	}
 }
 
-//void TileMap::Draw(int start_col, int end_col)
-//{
-//	for (int i = 0; i < 12; i++) {
-//		for (int j = start_col; j <= end_col; j++) {
-//			sprites->Get(map_Data[i][j])->Draw(tile_Width * (j - start_col), tile_Height * i);
-//		}
-//	}
-//}
-
-void TileMap::abcxyz()
-{
-	fstream fs;
-	fs.open(filePath_data, ios::out);
-	if (fs.fail())
-	{
-		DebugOut(L"TileMap::Load_MapData failed: ID=%d", ID);
-		fs.close();
-		return;
-	}
-
-	for (int i = 0; i < map_Data.size(); i++) 
-	{
-		for (int j = 0; j < map_Data[0].size(); j++)
-		{
-			fs << map_Data[i][j] << " ";
-		}
-		fs << endl;
-	}
-
-
-	fs.close();
-}
 
 TileMap::~TileMap()
 {

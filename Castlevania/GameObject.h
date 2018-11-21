@@ -33,8 +33,12 @@ protected:
 	int nx;
 	int state;
 	DWORD dt;
+	bool fall;
+	bool die = false;
 	static vector<LPANIMATION> animations;
 public:
+	bool GetFall() { return this->fall; }
+	void SetFall(bool a) { this->fall = a; }
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }
 	void SetSpeed(float vx, float vy) { this->vx = vx, this->vy = vy; }
 	virtual void SetState(int state) { this->state = state; }
@@ -64,5 +68,7 @@ virtual	void Render();
 // ve khung gioi hsn
 virtual void GetBoundingBox(float &left, float &top, float &right, float &bottom) = 0;
 	~GameObject();
+	void SetDie(bool a) { this->die = a; }
+	bool GetDie() { return this->die; }
 };
 

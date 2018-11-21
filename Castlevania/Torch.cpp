@@ -2,17 +2,17 @@
 
 void Torch::GetBoundingBox(float & left, float & top, float & right, float & bottom)
 {
-	if (state == TORCH_STATE_DIE)
+	/*if (state == TORCH_STATE_DIE)
 	{
 		left = top = right = bottom = 0;
 	}
 	else
-	{
+	{*/
 		left = x;
 		top = y;
 		right = x + TORCH_BBOX_WIDTH;
 		bottom = y + TORCH_BBOX_HEIGHT;
-	}
+	//}
 }
 
 void Torch::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)

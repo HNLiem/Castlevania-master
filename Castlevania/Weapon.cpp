@@ -4,9 +4,14 @@
 #include"Torch.h"
 #include"debug.h"
 #include<algorithm>
+#include"ItemHeart.h"
+#include"ItemKnife.h"
+#include"ItemWhip.h"
+using namespace std;
 
-void Weapon::Update(DWORD dt,vector<LPGAMEOBJECT> coObjects)
+void Weapon::Update(DWORD dt,vector<LPGAMEOBJECT> &coObjects)
 {
+	int b = 1;
 	GameObject::Update(dt);
 
 	if (box==true) 
@@ -22,7 +27,21 @@ void Weapon::Update(DWORD dt,vector<LPGAMEOBJECT> coObjects)
 					if (e->GetState() != TORCH_STATE_DIE)
 					{
 						e->SetState(TORCH_STATE_DIE);
+						e->SetFall(true);
+						for (UINT j = i+1; j < coObjects.size(); j++)
+						{
+							b += 1;
+							LPGAMEOBJECT a = coObjects[j];
+							if (dynamic_cast<ItemHeart *>(a) || dynamic_cast<ItemWhip *>(a) || dynamic_cast<ItemKnife *>(a))
+							{
+								DebugOut(L"\n %d", b);
+								a->SetFall(e->GetFall());
+								break;
+							}
+						}					
 					}
+					//coObjects.erase(coObjects.begin() + i);
+					coObjects[i]->SetDie(true);
 				}
 			}
 		}

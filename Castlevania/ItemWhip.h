@@ -3,7 +3,7 @@
 #define ITEMWHIP_STATE			100
 #define ITEMWHIP_STATE_DIE		200
 #define ITEMWHIP_ANI			84
-#define ITEMWHIP_ANI_DIE		85
+#define ITEMWHIP_ANI_DIE		85 
 #define ITEMWHIP_BBOX_HEIGHT	32
 #define ITEMWHIP_BBOX_WIDTH		32
 class ItemWhip:public GameObject

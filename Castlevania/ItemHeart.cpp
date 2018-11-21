@@ -3,16 +3,19 @@
 using namespace std;
 void ItemHeart::Render()
 {
-	int ani;
-	if (state == ITEMHEART_STATE_DIE)
+	if (fall)
 	{
-		ani = ITEMHGEART_ANI_DIE;
+		int ani;
+		if (state == ITEMHEART_STATE_DIE)
+		{
+			ani = ITEMHGEART_ANI_DIE;
+		}
+		else
+		{
+			ani = ITEMHEART_ANI;
+		}
+		animations[ani]->Render(x, y);
 	}
-	else
-	{
-		ani = ITEMHEART_ANI;
-	}
-	animations[ani]->Render(x, y);
 }
 
 void ItemHeart::SetState(int state)
@@ -31,21 +34,30 @@ void ItemHeart::SetState(int state)
 
 void ItemHeart::GetBoundingBox(float & l, float & t, float & r, float & b)
 {
-	if (state == ITEMHEART_STATE_DIE)
+	/*if (state == ITEMHEART_STATE_DIE)
 	{
 		l = t = r = b = 0;
 		
 	}
 	else
-	{	
+	{*/	
 		l = x;
 		t = y;
 		r = x + ITEMHGEART_BBOX_WIDTH;
 		b = y + ITEMHEART_BBOX_HEIHT;
-	}
+	//}
 }
 
 void ItemHeart::Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects )
 {
 	GameObject::Update(dt, colliable_objects);
+	if (fall)
+	{
+		y += 0.1 * dt;
+		if (y > 320 - ITEMHEART_BBOX_HEIHT)
+		{
+			vy = 0;
+			y = 320 - ITEMHEART_BBOX_HEIHT;
+		}
+	}
 }
