@@ -16,6 +16,9 @@
     <Filter Include="Header Files\Item">
       <UniqueIdentifier>{31e9800f-2b0e-4ebb-99f1-06ea78dc89ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Item">
+      <UniqueIdentifier>{e7832447-dd95-4bfc-9e06-55050a108b55}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -64,13 +67,13 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ItemHeart.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemWhip.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Item</Filter>
     </ClCompile>
     <ClCompile Include="ItemKnife.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemWhip.cpp">
+      <Filter>Source Files\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,13 +120,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ItemHeart.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemWhip.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Item</Filter>
     </ClInclude>
     <ClInclude Include="ItemKnife.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemWhip.h">
+      <Filter>Header Files\Item</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

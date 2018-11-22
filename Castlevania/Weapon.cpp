@@ -11,9 +11,7 @@ using namespace std;
 
 void Weapon::Update(DWORD dt,vector<LPGAMEOBJECT> &coObjects)
 {
-	int b = 1;
 	GameObject::Update(dt);
-
 	if (box==true) 
 	{
 		DebugOut(L"\n true");
@@ -29,18 +27,15 @@ void Weapon::Update(DWORD dt,vector<LPGAMEOBJECT> &coObjects)
 						e->SetState(TORCH_STATE_DIE);
 						e->SetFall(true);
 						for (UINT j = i+1; j < coObjects.size(); j++)
-						{
-							b += 1;
+						{						
 							LPGAMEOBJECT a = coObjects[j];
 							if (dynamic_cast<ItemHeart *>(a) || dynamic_cast<ItemWhip *>(a) || dynamic_cast<ItemKnife *>(a))
 							{
-								DebugOut(L"\n %d", b);
 								a->SetFall(e->GetFall());
 								break;
 							}
 						}					
 					}
-					//coObjects.erase(coObjects.begin() + i);
 					coObjects[i]->SetDie(true);
 				}
 			}
@@ -51,9 +46,7 @@ void Weapon::Update(DWORD dt,vector<LPGAMEOBJECT> &coObjects)
 void Weapon::Render(float nx)
 {
 	if (state == WEAPON_STATE_FIGHT)
-	{
-		
-		
+	{		
 		if (level == 1)
 		{
 			if (nx > 0)
@@ -89,12 +82,8 @@ void Weapon::Render(float nx)
 		}
 		animations[ani]->Render(x, y);
 		
-		RenderBoundingBox();
-		
-	
-	}
-	
-	
+		RenderBoundingBox();	
+	}	
 }
 
 void Weapon::SetState(int state)
@@ -118,8 +107,7 @@ void Weapon::GetBoundingBox(float & left, float & top, float & right, float & bo
 	if (state == WEAPON_STATE_FIGHT)
 	{		
 			if (ani == WEAPON_ANI_FIGHT_LEVEL_A_RIGHT )
-			{
-				
+			{		
 				left = x + 35;
 				top = y + 9;
 				right = left + WEAPON_BBOX_WIDTH ;
@@ -161,10 +149,7 @@ void Weapon::GetBoundingBox(float & left, float & top, float & right, float & bo
 				top = y + 15;
 				right = left + WEAPON_C_BBOX_WIDTH;
 				bottom = top + WEAPON_BBOX_HEIGHT;
-			}
-		
-		
-		
+			}	
 	}
 }
 

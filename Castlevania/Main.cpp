@@ -228,7 +228,7 @@ void LoadResources()
 	sprites->Add(10026, 328, 148, 360, 186, texWeapon, { -30,8 });
 	sprites->Add(10027, 244, 158, 320, 170, texWeapon, { 45,15 });
 	//di trai
-	sprites->Add(11001, 136, 4, 166, 64, texSimon1);
+	sprites->Add(11001, 136, 3, 166, 64, texSimon1);
 	sprites->Add(11002, 78, 2, 102, 64, texSimon1);
 	sprites->Add(11003, 12, 4, 44, 64, texSimon1);
 	// danh trai
@@ -476,7 +476,8 @@ void LoadResources()
 	
 	// load map
 	tilemap = new TileMap(L"Resources\\map1.txt", 1536, 384, 32, 32);
-	tilemap->LoadResources(texmap);
+	tilemap->SetTileMap(texmap);
+	tilemap->LoadResources();
 	//tilemap->Load_MapData();
 }
 void Update(DWORD dt)

@@ -7,7 +7,7 @@ TileMap::TileMap( LPCWSTR filePath_data, int map_width, int map_height, int tile
 	
 	this->filePath_data = filePath_data;
 
-	sprites = Sprites::GetInstance();
+	this->sprites = Sprites::GetInstance();
 
 	this->map_Width = map_width;
 	this->map_Height = map_height;
@@ -19,20 +19,15 @@ TileMap::TileMap( LPCWSTR filePath_data, int map_width, int map_height, int tile
 	nums_col = map_Width / tile_Width;
 }
 
-void TileMap::LoadResources(LPDIRECT3DTEXTURE9 texTileMap)
+void TileMap::LoadResources()
 {
-	/*Textures * texture = Textures::GetInstance();
-
-	texture->Add(ID, filePath_tex, D3DCOLOR_XRGB(255, 255, 255));
-
-
-	LPDIRECT3DTEXTURE9 texTileMap = texture->Get(ID);*/
+	
 
 	// lấy thông tin về kích thước của texture lưu các block tiles (filePath_tex)
 
 	D3DSURFACE_DESC surfaceDesc;
 	int level = 0;
-	texTileMap->GetLevelDesc(level, &surfaceDesc);
+	this->texMap->GetLevelDesc(level, &surfaceDesc);
 
 	// tính toán số hàng, số cột cần thiết để load tile 
 	int nums_rowToRead = surfaceDesc.Height / tile_Height;
@@ -45,7 +40,7 @@ void TileMap::LoadResources(LPDIRECT3DTEXTURE9 texTileMap)
 	{
 		for (int j = 0; j < nums_colToRead; j++)
 		{
-			sprites->Add(id_sprite, tile_Width * j, tile_Height * i, tile_Width * (j + 1), tile_Height * (i + 1), texTileMap);
+			sprites->Add(id_sprite, tile_Width * j, tile_Height * i, tile_Width * (j + 1), tile_Height * (i + 1), this->texMap);
 			id_sprite += 1;
 		}
 	}
@@ -66,17 +61,17 @@ void TileMap::LoadResources(LPDIRECT3DTEXTURE9 texTileMap)
 		getline(fs, line);
 
 		// tách số từ chuỗi đọc được
-
+		// vector chua so trong 1 dong
 		vector<int> numInLine;
 		stringstream ss(line);
 		int n;
-
-		while (ss >> n) {
+		// doc tren mot dong 
+		while (ss >> n) 
+		{
+			// luu cac so vao dong 
 			numInLine.push_back(n);
 		}
-
-		// thêm vào ma trận map_Data
-
+		// luu dng vao trong mapdata 
 		map_Data.push_back(numInLine);
 	}
 
@@ -84,42 +79,6 @@ void TileMap::LoadResources(LPDIRECT3DTEXTURE9 texTileMap)
 	fs.close();
 }
 
-//void TileMap::Load_MapData()
-//{
-//	fstream fs;
-//	fs.open(filePath_data, ios::in);
-//
-//	if (fs.fail())
-//	{
-//		DebugOut(L"[ERROR] TileMap::Load_MapData failed: ID=%d", ID);
-//		fs.close();
-//		return;
-//	}
-//
-//	string line;
-//
-//	while (!fs.eof())
-//	{
-//		getline(fs, line);
-//
-//		// tách số từ chuỗi đọc được
-//
-//		vector<int> numInLine;
-//		stringstream ss(line);
-//		int n;
-//
-//		while (ss >> n) {
-//			numInLine.push_back(n);
-//		}
-//
-//		// thêm vào ma trận map_Data
-//
-//		map_Data.push_back(numInLine);
-//	}
-//
-//
-//	fs.close();
-//}
 
 void TileMap::Draw(D3DXVECTOR2 camPosition)
 {
