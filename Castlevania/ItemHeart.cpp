@@ -53,7 +53,7 @@ void ItemHeart::Update(DWORD dt, vector<LPGAMEOBJECT> *colliable_objects )
 	GameObject::Update(dt, colliable_objects);
 	if (fall)
 	{
-		y += 0.1 * dt;
+		y =y+ 0.1 * dt;
 		if (y > 320 - ITEMHEART_BBOX_HEIHT)
 		{
 			vy = 0;

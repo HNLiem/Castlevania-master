@@ -2,17 +2,10 @@
 
 void Torch::GetBoundingBox(float & left, float & top, float & right, float & bottom)
 {
-	/*if (state == TORCH_STATE_DIE)
-	{
-		left = top = right = bottom = 0;
-	}
-	else
-	{*/
 		left = x;
 		top = y;
 		right = x + TORCH_BBOX_WIDTH;
 		bottom = y + TORCH_BBOX_HEIGHT;
-	//}
 }
 
 void Torch::Update(DWORD dt, vector<LPGAMEOBJECT>* coObjects)
@@ -30,6 +23,7 @@ void Torch::Render()
 		ani = TORCH_ANI_DIE;
 	}
 	animations[ani]->Render(x,y);
+	RenderBoundingBox();
 }
 
 void Torch::SetState(int state)

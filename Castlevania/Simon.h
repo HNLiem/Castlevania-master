@@ -1,11 +1,11 @@
 #pragma once
 #include "GameObject.h"
 #include"Weapon.h"
+#include"WeaponKnife.h"
 
 #define SIMON_WALKING_SPEED		0.2f
 #define SIMON_JUMP_SPEED_Y		0.5f
 #define SIMON_GRAVITY			0.002f
-
 #define SIMON_STATE_IDLE			0
 #define SIMON_STATE_WALKING_RIGHT	100
 #define SIMON_STATE_WALKING_LEFT	200
@@ -16,9 +16,6 @@
 #define SIMON_STATE_SIT_FIGHT		700
 #define SIMON_STATE_LEVEL_WEAPON	800
 #define SIMON_STATE_KNIFE			900
-
-
-
 #define SIMON_ANI_IDLE_RIGHT		0
 #define SIMON_ANI_IDLE_LEFT			1
 #define SIMON_ANI_WALKING_RIGHT		2
@@ -33,8 +30,8 @@
 #define SIMON_ANI_SIT_FIGHT_LEFT	11
 #define SIMON_ANI_LEVEL_RIGHT		12
 #define SIMON_ANI_LEVEL_LEFT		13
-//#define SIMON_ANI_KNIFE_RIGHT		14
-//#define SIMON_ANI_KNIFE_LEFT		15
+#define SIMON_ANI_KNIFE_RIGHT		14
+#define SIMON_ANI_KNIFE_LEFT		15
 #define SIMON_BBOX_WIDTH			30
 #define SIMON_BBOX_HEIGHT			60
 #define SIMON_UNTOUCHABLE_TIME		5000
@@ -49,6 +46,7 @@ class Simon:public GameObject
 	
 public:
 	Weapon weapon;
+	WeaponKnife weaponKnife;
 	virtual void Update(DWORD dt,vector<LPGAMEOBJECT> *colliable_objects = NULL);
 	virtual void Render();
 	void SetState(int state);

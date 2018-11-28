@@ -25,6 +25,7 @@ Lỗi cần fix:
 #include"ItemHeart.h"
 #include"ItemWhip.h"
 #include"ItemKnife.h"
+#include"WeaponKnife.h"
 
 
 #define WINDOW_CLASS_NAME L"SampleWindow"
@@ -43,6 +44,7 @@ Lỗi cần fix:
 #define ID_TEX_HEART			7
 #define ID_TEX_ITEM_WEAPON		8
 #define ID_TEX_ITEM_KNIFE		9
+#define ID_TEX_ITEM_KNIFE1		10
 #define ID_TEX_MISC				20
 
 
@@ -76,6 +78,8 @@ void SampleKeyHander::OnKeyDown(int KeyCode)
 		simon->SetState(SIMON_STATE_FIGHT);
 		//weapon->SetState(WEAPON_STATE_FIGHT,simon);
 		break;
+	case DIK_V:
+		simon->SetState(SIMON_STATE_KNIFE);
 	}
 }
 
@@ -91,6 +95,10 @@ void SampleKeyHander::KeyState(BYTE *states)
 		return;
 	}
 	if (simon->GetState() == SIMON_STATE_FIGHT && !simon->IsHitting())
+	{
+		return;
+	}
+	if (simon->GetState() == SIMON_STATE_KNIFE && !simon->IsHitting())
 	{
 		return;
 	}
@@ -163,6 +171,7 @@ void LoadResources()
 	textures->Add(ID_TEX_HEART, L"Resources\\item\\0.png", D3DCOLOR_XRGB(255, 0, 255));
 	textures->Add(ID_TEX_ITEM_WEAPON, L"Resources\\item\\3.png", D3DCOLOR_XRGB(255, 0, 255));
 	textures->Add(ID_TEX_ITEM_KNIFE, L"Resources\\item\\4.png", D3DCOLOR_XRGB(255, 0, 255));
+	textures->Add(ID_TEX_ITEM_KNIFE1, L"Resources\\weapon\\1.png", D3DCOLOR_XRGB(255, 0, 255));
 	Sprites * sprites = Sprites::GetInstance();
 	Animations * animations = Animations::GetInstance();
 	LPDIRECT3DTEXTURE9 texSimon = textures->Get(ID_TEX_SIMON);
@@ -175,6 +184,8 @@ void LoadResources()
 	LPDIRECT3DTEXTURE9 texheart = textures->Get(ID_TEX_HEART);
 	LPDIRECT3DTEXTURE9 texItemWeapon = textures->Get(ID_TEX_ITEM_WEAPON);
 	LPDIRECT3DTEXTURE9 texItemKnife = textures->Get(ID_TEX_ITEM_KNIFE);
+	LPDIRECT3DTEXTURE9 texItemKnife1 = textures->Get(ID_TEX_ITEM_KNIFE1);
+	LPDIRECT3DTEXTURE9 texbox = textures->Get(ID_TEX_BBOX);	
 	// gach
 	sprites->Add(20001, 0, 0, 32, 32, texbrick);
 	// ngon duoc
@@ -191,7 +202,7 @@ void LoadResources()
 	// item knife
 	sprites->Add(20009, 0, 0, 32, 18, texItemKnife);
 	sprites->Add(20010, 0, 0, 0, 0, texItemKnife);
-	
+	sprites->Add(20011, 0,0, 32, 18, texItemKnife1);
 
 	//di phai
 	sprites->Add(10001, 314, 4, 344, 64, texSimon);
@@ -340,7 +351,18 @@ void LoadResources()
 	ani->Add(110020);
 	ani->Add(110021);
 	animations->Add(903, ani);
-	// roi b ben phai
+	// danh ben phai
+	ani = new Animation(100);
+	ani->Add(10004);
+	ani->Add(10005);
+	ani->Add(10006);
+	animations->Add(904, ani);
+	// danh ben trai
+	ani = new Animation(100);
+	ani->Add(11006);
+	ani->Add(11005);
+	ani->Add(11004);
+	animations->Add(905, ani);
 	
 
 	simon = new Simon();
@@ -358,6 +380,8 @@ void LoadResources()
 	simon->AddAnimation(901);// ngoi danh ben trai
 	simon->AddAnimation(902);
 	simon->AddAnimation(903);// simon giut giut ben trai
+	simon->AddAnimation(904);
+	simon->AddAnimation(905);
 
 	objects.push_back(simon);
 	// load cai roi 
@@ -366,6 +390,7 @@ void LoadResources()
 	ani->Add(10012);
 	ani->Add(10013);
 	animations->Add(1000, ani);
+
 	ani = new Animation(100);
 	ani->Add(11011);
 	ani->Add(11012);
@@ -411,8 +436,8 @@ void LoadResources()
 	for (int i = 0; i < 50; i++)
 	{
 		Brick *brick = new Brick();
-		brick->AddAnimation(1002);
-		brick->SetPosition(i * 32.0f,320);
+		brick->AddAnimation(1002);	
+		brick->SetPosition(i * 32.0f, 320);	
 		objects.push_back(brick);		
 	}
 	// load ngon duoc
@@ -473,7 +498,17 @@ void LoadResources()
 	itemknife->AddAnimation(1010);
 	itemknife->SetPosition(250*5, 320 - 64);
 	objects.push_back(itemknife);
-	
+	// load cai dao 
+	ani = new Animation(100);
+	ani->Add(20009);
+	animations->Add(1011, ani);
+	ani = new Animation(100);
+	ani->Add(20011);
+	animations->Add(1012, ani);
+	//simon->weaponKnife.AddAnimation
+	simon->weaponKnife.AddAnimation(1011);
+	simon->weaponKnife.AddAnimation(1012);
+	//simon->weaponKnife.SetPosition(20, 320-64);
 	// load map
 	tilemap = new TileMap(L"Resources\\map1.txt", 1536, 384, 32, 32);
 	tilemap->SetTileMap(texmap);
@@ -488,6 +523,8 @@ void Update(DWORD dt)
 		coObjects.push_back(objects[i]);
 	}
 	simon->weapon.Update(dt, objects);
+	simon->weaponKnife.Setnx(simon->Getnx());
+	simon->weaponKnife.Update(dt,&coObjects);
 	for (int i = 0; i < objects.size(); i++)
 	{
 		objects[i]->Update(dt, &coObjects);

@@ -49,7 +49,8 @@ public:
 	int Getnx() { return this->nx; }
 	static void AddAnimation(int aniId);
 	void RenderBoundingBox();
-
+	void Setx(float x) { this->x = x; }
+	void Setnx(float nx) { this->nx = nx; }
 	LPCOLLISIONEVENT SweptAABBEx(LPGAMEOBJECT coO);
 	bool AABBx(LPGAMEOBJECT coO);
 	void CalcPotentialCollisions(vector<LPGAMEOBJECT> *coObjects, vector<LPCOLLISIONEVENT> &coEvents);

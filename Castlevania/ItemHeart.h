@@ -2,8 +2,8 @@
 #include"GameObject.h"
 #define ITEMHEART_STATE				100
 #define ITEMHEART_STATE_DIE			200
-#define ITEMHEART_ANI				80
-#define ITEMHGEART_ANI_DIE			81
+#define ITEMHEART_ANI				82
+#define ITEMHGEART_ANI_DIE			83
 #define ITEMHEART_BBOX_HEIHT        16
 #define ITEMHGEART_BBOX_WIDTH		16
 class ItemHeart:public GameObject

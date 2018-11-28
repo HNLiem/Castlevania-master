@@ -5,8 +5,8 @@
 
 #define TORCH_STATE_FIRE	100
 #define TORCH_STATE_DIE		200
-#define TORCH_ANI			70
-#define TORCH_ANI_DIE		71
+#define TORCH_ANI			72
+#define TORCH_ANI_DIE		73
 class Torch:public GameObject
 {
 public:

@@ -13,7 +13,6 @@ void Simon::Update(DWORD dt,vector<LPGAMEOBJECT> *coObjects)
 	GameObject::Update(dt);
 	vy += SIMON_GRAVITY*dt;
 	this->weapon.SetPosition(this->Getx(),this->Gety());
-
 	vector<LPCOLLISIONEVENT> coEvents;
 	vector<LPCOLLISIONEVENT> coEventsResult;
 	coEvents.clear();
@@ -64,7 +63,7 @@ void Simon::Update(DWORD dt,vector<LPGAMEOBJECT> *coObjects)
 				if (itemknife->GetState() != ITEMKNIFE_STATE_DIE)
 				{
 					itemknife->SetState(ITEMKNIFE_STATE_DIE);
-					this->knife += 1;
+					
 				}
 				
 				itemknife->SetDie(true);
@@ -72,6 +71,10 @@ void Simon::Update(DWORD dt,vector<LPGAMEOBJECT> *coObjects)
 			else if (dynamic_cast<Torch *>(e->obj))
 			{
 				x += dx;
+				if (ny != 0)
+				{
+					vy = 0;
+				}
 			}
 			else
 			{
@@ -107,6 +110,20 @@ void Simon::Render()
 		else
 		{
 			ani = SIMON_ANI_FIGHT_LEFT;
+		}
+	}
+	else if(state==SIMON_STATE_KNIFE)
+	{
+		
+		
+		if (nx > 0)
+		{
+			ani = SIMON_ANI_KNIFE_RIGHT;
+			
+		}
+		else
+		{
+			ani = SIMON_ANI_KNIFE_LEFT;
 		}
 	}
 	else if (state == SIMON_STATE_JUMP)
@@ -178,6 +195,8 @@ void Simon::Render()
 	isCompleteAnimation = animations[ani]->GetOver();
 	this->weapon.GetBox(isCompleteAnimation);
 	this->weapon.Render(this->Getnx());
+	this->weaponKnife.Render(this->Getnx());
+	RenderBoundingBox();
 	
 	
 }
@@ -192,30 +211,42 @@ void Simon::SetState(int state)
 		vx = SIMON_WALKING_SPEED;
 		nx = 1;
 		this->weapon.SetState(WEAPON_STATE_IDLE);
+		this->weaponKnife.SetState(WEAPON_KNIFE_STATE_DIE);
 		break;
 	case SIMON_STATE_WALKING_LEFT:
 		isStand = true;
 		vx = -SIMON_WALKING_SPEED;
 		nx = -1;
 		this->weapon.SetState(WEAPON_STATE_IDLE);
+		this->weaponKnife.SetState(WEAPON_KNIFE_STATE_DIE);
 		break;
 	case SIMON_STATE_JUMP:		
 		isCompleteAnimation = false;
 			vy = -SIMON_JUMP_SPEED_Y;
 			this->weapon.SetState(WEAPON_STATE_IDLE);
+			this->weaponKnife.SetState(WEAPON_KNIFE_STATE_DIE);
 		break;
 	case SIMON_STATE_IDLE:
 		vx = 0;
 		this->weapon.SetState(WEAPON_STATE_IDLE);
+		this->weaponKnife.SetState(WEAPON_KNIFE_STATE_DIE);
 		break;
 	case SIMON_STATE_FIGHT:
 		isCompleteAnimation = false;
 		vx = 0;
 		this->weapon.SetState(WEAPON_STATE_FIGHT);
 		break;
+	case SIMON_STATE_KNIFE :
+		isCompleteAnimation = false;
+		vx = 0;
+		this->weaponKnife.SetState(WEAPON_KNIFE_STATE_FIGHT);
+		this->weaponKnife.SetFall(true);
+		this->weaponKnife.SetPosition(this->Getx(), this->Gety());
+		break;
 	case SIMON_STATE_SIT:
 		vx = 0;
 		this->weapon.SetState(WEAPON_STATE_IDLE);
+		this->weaponKnife.SetState(WEAPON_KNIFE_STATE_DIE);
 		break;
 	case SIMON_STATE_SIT_FIGHT:
 		vx = 0;
@@ -225,6 +256,7 @@ void Simon::SetState(int state)
 	case SIMON_STATE_LEVEL_WEAPON:
 		vx = vy = 0;
 		this->weapon.SetState(WEAPON_STATE_IDLE);
+		this->weaponKnife.SetState(WEAPON_KNIFE_STATE_DIE);
 		break;
 	}
 	//this->weapon.SetState(state);
@@ -236,8 +268,9 @@ void Simon::GetBoundingBox(float & left, float & top, float & right, float & bot
     top = y;
 	right = x + SIMON_BBOX_WIDTH;
 	bottom = y + SIMON_BBOX_HEIGHT;
-	float l, t, r, b;
+	float l, t, r, b,l1,t1,r1,b1;
 	this->weapon.GetBoundingBox(l,t,r,b);
+	this->weaponKnife.GetBoundingBox(l1, t1, r1, b1);
 }
 
 bool Simon::IsStand()

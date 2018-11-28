@@ -89,9 +89,9 @@ void TileMap::Draw(D3DXVECTOR2 camPosition)
 	{
 		for (int j = start_col_to_draw; j <= end_col_to_draw; j++)
 		{
-			// +camPosition.x để luôn giữ camera ở chính giữa, vì trong hàm draw có trừ cho camPosition.x làm các object đều di chuyển theo
-			// +(int)camPosition.x % 32 để giữ cho camera chuyển động mượt (thực ra giá trị này bằng vx*dt, chính là quãng đường dịch chuyển của simon)
-			float x = tile_Width * (j - start_col_to_draw) + camPosition.x - (int)camPosition.x % 32;
+			// camx để luôn giữ camera ở chính giữa, vì trong hàm draw có trừ cho camPosition.x làm các object đều di chuyển theo
+			
+			float x = tile_Width * (j - start_col_to_draw) + camPosition.x - (int)camPosition.x % 32; // vx*dt
 			float y = tile_Height * i;
 
 			sprites->Get(map_Data[i][j])->Draw(x, y);

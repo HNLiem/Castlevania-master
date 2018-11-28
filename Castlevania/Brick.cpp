@@ -2,7 +2,7 @@
 
 void Brick::Render()
 {
-	animations[20]->Render(x, y);
+	animations[22]->Render(x, y);
 }
 
 void Brick::GetBoundingBox(float & l, float & t, float & r, float & b)

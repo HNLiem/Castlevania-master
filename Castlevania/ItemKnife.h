@@ -2,9 +2,9 @@
 #include"GameObject.h"
 #define ITEMKNIFE_STATE				100
 #define ITEMKNIFE_STATE_DIE			200
-#define ITEMKNIFE_ANI				88
-#define ITEMKNIFE_ANI_DIE			89
-#define ITEMKNIFE_BBOX_HEIGHT        18
+#define ITEMKNIFE_ANI				90
+#define ITEMKNIFE_ANI_DIE			91
+#define ITEMKNIFE_BBOX_HEIGHT       18
 #define ITEMKNIFE_BBOX_WIDTH		32
 class ItemKnife:public GameObject
 {

@@ -1,3 +1,6 @@
-﻿  TileMap.cpp
-c:\users\hnl\desktop\new folder\castlevania-master\castlevania\tilemap.cpp(95): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+﻿  WeaponKnife.cpp
+c:\users\hnl\desktop\new folder\castlevania-master\castlevania\gameobject.h(53): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h: DIRECTINPUT_VERSION undefined. Defaulting to version 0x0800
+c:\users\hnl\desktop\new folder\castlevania-master\castlevania\game.h(6): warning C4005: 'DIRECTINPUT_VERSION': macro redefinition
+  c:\program files (x86)\microsoft directx sdk (june 2010)\include\dinput.h(42): note: see previous definition of 'DIRECTINPUT_VERSION'
   Castlevania.vcxproj -> C:\Users\HNL\Desktop\New folder\Castlevania-master\Debug\Castlevania.exe
