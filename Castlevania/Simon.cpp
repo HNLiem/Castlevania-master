@@ -196,7 +196,7 @@ void Simon::Render()
 	this->weapon.GetBox(isCompleteAnimation);
 	this->weapon.Render(this->Getnx());
 	this->weaponKnife.Render(this->Getnx());
-	RenderBoundingBox();
+	//RenderBoundingBox();
 	
 	
 }

@@ -31,8 +31,11 @@ void Weapon::Update(DWORD dt,vector<LPGAMEOBJECT> &coObjects)
 							LPGAMEOBJECT a = coObjects[j];
 							if (dynamic_cast<ItemHeart *>(a) || dynamic_cast<ItemWhip *>(a) || dynamic_cast<ItemKnife *>(a))
 							{
-								a->SetFall(e->GetFall());
-								break;
+								if (a->Getid()==e->Getid())
+								{
+									a->SetFall(e->GetFall());
+									break;
+								}
 							}
 						}					
 					}
@@ -82,7 +85,7 @@ void Weapon::Render(float nx)
 		}
 		animations[ani]->Render(x, y);
 		
-		RenderBoundingBox();	
+		//RenderBoundingBox();	
 	}	
 }
 

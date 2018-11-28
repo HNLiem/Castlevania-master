@@ -454,6 +454,7 @@ void LoadResources()
 		torch->AddAnimation(1003);
 		torch->AddAnimation(1004);
 		torch->SetPosition(i*250.0f, 320 - 64);
+		torch->Setid(i);
 		objects.push_back(torch);
 	}
 	// load item
@@ -469,6 +470,7 @@ void LoadResources()
 		itemheart->AddAnimation(1005);
 		itemheart->AddAnimation(1006);
 		itemheart->SetPosition(i*250, 320-64);
+		itemheart->Setid(i);
 		objects.push_back(itemheart);
 	}
 	// load item roi
@@ -484,6 +486,7 @@ void LoadResources()
 		itemwhip->AddAnimation(1007);
 		itemwhip->AddAnimation(1008);
 		itemwhip->SetPosition(i*250, 320 - 64);
+		itemwhip->Setid(i);
 		objects.push_back(itemwhip);
 	}
 	// load item knife
@@ -497,6 +500,7 @@ void LoadResources()
 	itemknife->AddAnimation(1009);
 	itemknife->AddAnimation(1010);
 	itemknife->SetPosition(250*5, 320 - 64);
+	itemknife->SetDie(5);
 	objects.push_back(itemknife);
 	// load cai dao 
 	ani = new Animation(100);

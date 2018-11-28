@@ -27,6 +27,7 @@ struct CollisionEvent
 class GameObject
 {
 protected:
+	int id;
 	float x, y;
 	float vx, vy;
 	float dx, dy;
@@ -37,6 +38,8 @@ protected:
 	bool die = false;
 	static vector<LPANIMATION> animations;
 public:
+	int Getid() { return this->id; }
+	void Setid(int id) { this->id = id; }
 	bool GetFall() { return this->fall; }
 	void SetFall(bool a) { this->fall = a; }
 	void SetPosition(float x, float y) { this->x = x, this->y = y; }

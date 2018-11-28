@@ -23,7 +23,7 @@ void Torch::Render()
 		ani = TORCH_ANI_DIE;
 	}
 	animations[ani]->Render(x,y);
-	RenderBoundingBox();
+	//RenderBoundingBox();
 }
 
 void Torch::SetState(int state)
